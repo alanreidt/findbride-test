@@ -1,0 +1,21 @@
+.TaskInput {
+    display: grid;
+    grid-template-columns: 7fr 1fr 2fr;
+    grid-column-gap: 5px;
+}
+
+.Input {
+    border: 1px solid #e6e9ec;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.Button {
+    background-color:  #e6e9ec;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
