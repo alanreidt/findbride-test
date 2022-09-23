@@ -1,10 +1,10 @@
-import {ILinkedListNode} from "./types/ILinkedListNode";
+import {LinkedListNode} from "./types/LinkedListNode";
 import {Task} from "./types/Task";
 import {AnyAction} from "redux";
 import {addAction, invertAction, removeAction} from "./actions";
 
 type TasksState = {
-    headTask: ILinkedListNode<Task> | null;
+    headTask: LinkedListNode<Task> | null;
 }
 
 const initialState: TasksState = {
