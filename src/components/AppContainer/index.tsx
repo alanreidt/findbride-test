@@ -17,6 +17,9 @@ export function AppContainer() {
                 onAdd={name => dispatch(addAction(name))}
                 onInvert={() => dispatch(invertAction())}
             />
+            <ul>
+                {tasks?.map((task) => <li key={task.id}>{task.name}</li>)}
+            </ul>
         </div>
     </div>
 }

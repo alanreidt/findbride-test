@@ -14,10 +14,11 @@ export function TaskInput({onAdd, onInvert}: Props) {
 
     const handleAdd = useCallback(() => {
         onAdd(name);
+        setName('');
     }, [name]);
 
     return <div className={styles.TaskInput}>
-        <input onChange={handleOnChange} className={styles.Input} type="text" placeholder="Enter task name"/>
+        <input onChange={handleOnChange} value={name} className={styles.Input} type="text" placeholder="Enter task name"/>
         <input onClick={handleAdd} className={styles.Button} type="button" value="Add"/>
         <input onClick={onInvert} className={styles.Button} type="button" value="Invert"/>
     </div>
