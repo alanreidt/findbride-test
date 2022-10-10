@@ -9,12 +9,7 @@
     "strictNullChecks": true,
     "lib": ["dom"],
     "moduleResolution": "node",
-    "typeRoots": [
-      "types.d.ts",
-      "node_modules/@types"
-    ]
+    "typeRoots": ["types.d.ts", "node_modules/@types"]
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"]
 }
