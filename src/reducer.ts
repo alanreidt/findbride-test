@@ -2,6 +2,7 @@ import { LinkedListNode } from "./types/LinkedListNode";
 import { Task, TaskStatus } from "./types/Task";
 import { AnyAction } from "redux";
 import { addAction, invertAction, removeAction } from "./actions";
+import { arrToLinkedList, linkedListToArr } from "./utils";
 
 type TasksState = {
   headTask: LinkedListNode<Task> | null;
@@ -30,24 +31,16 @@ export function tasksReducer(
       };
     }
 
-    let lastHeadTask = state.headTask;
-
-    while (lastHeadTask.next !== null) {
-      lastHeadTask = lastHeadTask.next;
-    }
-
-    lastHeadTask.next = {
-      value: {
-        id: Date.now(),
-        name: action.payload,
-        status: TaskStatus.IN_PROGRESS,
-      },
-      next: null,
-    };
+    const tasks = linkedListToArr(state.headTask);
+    tasks.push({
+      id: Date.now(),
+      name: action.payload,
+      status: TaskStatus.IN_PROGRESS,
+    });
 
     return {
       ...state,
-      headTask: state.headTask,
+      headTask: arrToLinkedList(tasks),
     };
   } else if (removeAction.match(action)) {
     return state;
