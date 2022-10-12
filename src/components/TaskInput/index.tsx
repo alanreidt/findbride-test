@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import styles from "./Task.css";
 
 type Props = {
@@ -9,34 +9,31 @@ type Props = {
 export function TaskInput({ onAdd, onInvert }: Props) {
   const [name, setName] = useState("");
 
-  const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-  }, []);
+  };
 
-  const handleSubmit = useCallback(
-    (e: ChangeEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      onAdd(name);
-      setName("");
-    },
-    [name]
-  );
+    onAdd(name);
+    setName("");
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.TaskInput}>
         <input
-          onChange={handleOnChange}
-          value={name}
-          className={styles.Input}
           type="text"
+          className={styles.Input}
+          value={name}
           placeholder="Enter task name"
+          onChange={handleChange}
         />
         <button className={styles.Button} type="submit">
           Add
         </button>
-        <button onClick={onInvert} className={styles.Button} type="button">
+        <button className={styles.Button} onClick={onInvert}>
           Invert
         </button>
       </div>
