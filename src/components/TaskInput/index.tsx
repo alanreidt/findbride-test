@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import styles from "./Task.css";
+import styles from "./TaskInput.css";
 
 type Props = {
   onAdd: (name: string) => void;
