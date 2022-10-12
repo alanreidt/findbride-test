@@ -13,32 +13,33 @@ export function TaskInput({ onAdd, onInvert }: Props) {
     setName(e.target.value);
   }, []);
 
-  const handleAdd = useCallback(() => {
-    onAdd(name);
-    setName("");
-  }, [name]);
+  const handleSubmit = useCallback(
+    (e: ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      onAdd(name);
+      setName("");
+    },
+    [name]
+  );
 
   return (
-    <div className={styles.TaskInput}>
-      <input
-        onChange={handleOnChange}
-        value={name}
-        className={styles.Input}
-        type="text"
-        placeholder="Enter task name"
-      />
-      <input
-        onClick={handleAdd}
-        className={styles.Button}
-        type="button"
-        value="Add"
-      />
-      <input
-        onClick={onInvert}
-        className={styles.Button}
-        type="button"
-        value="Invert"
-      />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className={styles.TaskInput}>
+        <input
+          onChange={handleOnChange}
+          value={name}
+          className={styles.Input}
+          type="text"
+          placeholder="Enter task name"
+        />
+        <button className={styles.Button} type="submit">
+          Add
+        </button>
+        <button onClick={onInvert} className={styles.Button} type="button">
+          Invert
+        </button>
+      </div>
+    </form>
   );
 }
