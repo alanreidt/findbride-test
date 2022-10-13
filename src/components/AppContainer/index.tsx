@@ -3,7 +3,8 @@ import styles from "./AppContainer.css";
 import { TaskInput } from "../TaskInput";
 import { useDispatch, useSelector } from "react-redux";
 import { tasksSelector } from "../../selectors";
-import { addAction, invertAction } from "../../actions";
+import { addAction, changeTaskStatusAction, invertAction } from "../../actions";
+import { TaskList } from "../TaskList";
 
 export function AppContainer() {
   const tasks = useSelector(tasksSelector);
@@ -18,11 +19,14 @@ export function AppContainer() {
           onAdd={(name) => dispatch(addAction(name))}
           onInvert={() => dispatch(invertAction())}
         />
-        <ul>
-          {tasks?.map((task) => (
-            <li key={task.id}>{task.name}</li>
-          ))}
-        </ul>
+        {tasks.length > 0 && (
+          <TaskList
+            tasks={tasks}
+            onTaskStatusChange={(value) => {
+              dispatch(changeTaskStatusAction(value));
+            }}
+          />
+        )}
       </div>
     </div>
   );

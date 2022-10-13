@@ -1,0 +1,92 @@
+.TaskList {
+  margin: 0;
+  padding-inline-start: 0;
+
+  border: 1px solid #e6e9ec;
+  border-radius: 3px;
+}
+
+.Task {
+  display: flex;
+  flex-flow: row nowrap;
+
+  list-style: none;
+}
+
+.Task:not(:last-child) {
+  border-bottom: 1px solid #e6e9ec;
+}
+
+.ChangeTaskStatusCheckbox {
+  position: relative;
+  display: inline-block;
+  flex: 1;
+}
+
+.OriginalLabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.OriginalCheckbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  opacity: 0;
+
+  display: inline-block;
+  vertical-align: top;
+
+  height: 40px;
+  width: 100%;
+  margin: 0;
+
+  cursor: pointer;
+}
+
+.OriginalCheckbox:checked ~ .FakeCheckbox .FakeCheckbox__StatusDisplay {
+  background-color: green;
+}
+
+.FakeCheckbox {
+  position: relative;
+  z-index: 100;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  height: 40px;
+  width: 100%;
+  padding: 0 20px;
+
+  box-sizing: border-box;
+}
+
+.FakeCheckbox__StatusDisplay {
+  display: inline-block;
+  vertical-align: top;
+
+  width: 15px;
+  height: 15px;
+  margin-right: 7px;
+
+  border: 1px solid black;
+  border-radius: 50%;
+  transition: background-color 0.05s ease-in;
+}
+
+.DeleteTaskButton {
+  flex: none;
+  height: 40px;
+  padding: 0 20px;
+
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+
+  box-sizing: border-box;
+}

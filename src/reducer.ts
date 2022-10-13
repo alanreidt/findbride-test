@@ -1,7 +1,12 @@
 import { LinkedListNode } from "./types/LinkedListNode";
 import { Task, TaskStatus } from "./types/Task";
 import { AnyAction } from "redux";
-import { addAction, invertAction, removeAction } from "./actions";
+import {
+  addAction,
+  changeTaskStatusAction,
+  invertAction,
+  removeAction,
+} from "./actions";
 import { arrToLinkedList, linkedListToArr } from "./utils";
 
 type TasksState = {
@@ -42,6 +47,19 @@ export function tasksReducer(
       ...state,
       headTask: arrToLinkedList(tasks),
     };
+  } else if (changeTaskStatusAction.match(action)) {
+    if (state.headTask === null) {
+      return state;
+    }
+
+    const tasks = linkedListToArr(state.headTask);
+    const { id, status } = action.payload;
+
+    const newTasks = tasks.map((task) =>
+      task.id === id ? { ...task, status } : task
+    );
+
+    return { ...state, headTask: arrToLinkedList(newTasks) };
   } else if (removeAction.match(action)) {
     return state;
   } else if (invertAction.match(action)) {
