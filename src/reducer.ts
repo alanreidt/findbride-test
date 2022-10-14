@@ -5,7 +5,7 @@ import {
   addAction,
   changeTaskStatusAction,
   invertAction,
-  removeAction,
+  deleteAction,
 } from "./actions";
 import { arrToLinkedList, linkedListToArr } from "./utils";
 
@@ -60,8 +60,15 @@ export function tasksReducer(
     );
 
     return { ...state, headTask: arrToLinkedList(newTasks) };
-  } else if (removeAction.match(action)) {
-    return state;
+  } else if (deleteAction.match(action)) {
+    if (state.headTask === null) {
+      return state;
+    }
+
+    const tasks = linkedListToArr(state.headTask);
+    const newTasks = tasks.filter((task) => task.id !== action.payload);
+
+    return { ...state, headTask: arrToLinkedList(newTasks) };
   } else if (invertAction.match(action)) {
     return state;
   } else {

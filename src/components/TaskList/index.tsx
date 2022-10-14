@@ -1,10 +1,12 @@
 import React from "react";
 import { Task, TaskStatus } from "../../types/Task";
+import DeleteIcon from "../../delete-icon.svg";
 import styles from "./TaskList.css";
 
 export function TaskList({
   tasks,
   onTaskStatusChange,
+  onTaskDelete,
 }: {
   tasks: Task[];
   onTaskStatusChange: ({
@@ -14,6 +16,7 @@ export function TaskList({
     id: number;
     status: TaskStatus;
   }) => void;
+  onTaskDelete: (id: number) => void;
 }) {
   return (
     <ul className={styles.TaskList}>
@@ -44,7 +47,14 @@ export function TaskList({
             </div>
           </div>
 
-          <button className={styles.DeleteTaskButton}>Delete</button>
+          <button
+            className={styles.DeleteTaskButton}
+            onClick={() => {
+              onTaskDelete(task.id);
+            }}
+          >
+            <DeleteIcon className={styles.DeleteTaskIcon} width="25" />
+          </button>
         </li>
       ))}
     </ul>

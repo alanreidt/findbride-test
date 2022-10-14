@@ -70,13 +70,14 @@
   display: inline-block;
   vertical-align: top;
 
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   margin-right: 7px;
 
   border: 1px solid black;
   border-radius: 50%;
   transition: background-color 0.05s ease-in;
+  box-sizing: border-box;
 }
 
 .DeleteTaskButton {
@@ -89,4 +90,9 @@
   cursor: pointer;
 
   box-sizing: border-box;
+}
+
+.DeleteTaskIcon {
+  display: inline-block;
+  vertical-align: middle;
 }
