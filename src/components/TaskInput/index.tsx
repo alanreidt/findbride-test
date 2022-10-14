@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
 import styles from "./TaskInput.css";
 
-type Props = {
+export function TaskInput({
+  onAdd,
+  onInvert,
+}: {
   onAdd: (name: string) => void;
   onInvert: () => void;
-};
-
-export function TaskInput({ onAdd, onInvert }: Props) {
+}) {
   const [name, setName] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

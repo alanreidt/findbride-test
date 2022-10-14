@@ -32,14 +32,14 @@ export function TaskList({
               className={styles.OriginalCheckbox}
               name={String(task.id)}
               checked={!!task.status}
-              onChange={(event) =>
+              onChange={(event) => {
                 onTaskStatusChange({
                   id: task.id,
                   status: event.target.checked
                     ? TaskStatus.DONE
                     : TaskStatus.IN_PROGRESS,
-                })
-              }
+                });
+              }}
             />
             <div className={styles.FakeCheckbox}>
               <span className={styles.FakeCheckbox__StatusDisplay} />

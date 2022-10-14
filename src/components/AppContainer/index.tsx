@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./AppContainer.css";
 import { TaskInput } from "../TaskInput";
 import { useDispatch, useSelector } from "react-redux";
 import { tasksSelector } from "../../selectors";
@@ -10,6 +9,7 @@ import {
   deleteAction,
 } from "../../actions";
 import { TaskList } from "../TaskList";
+import styles from "./AppContainer.css";
 
 export function AppContainer() {
   const tasks = useSelector(tasksSelector);
@@ -21,14 +21,18 @@ export function AppContainer() {
 
       <div className={styles.TaskInputWrapper}>
         <TaskInput
-          onAdd={(name) => dispatch(addAction(name))}
-          onInvert={() => dispatch(invertAction())}
+          onAdd={(name) => {
+            dispatch(addAction(name));
+          }}
+          onInvert={() => {
+            dispatch(invertAction());
+          }}
         />
         {tasks.length > 0 && (
           <TaskList
             tasks={tasks}
-            onTaskStatusChange={(value) => {
-              dispatch(changeTaskStatusAction(value));
+            onTaskStatusChange={(statusChangeState) => {
+              dispatch(changeTaskStatusAction(statusChangeState));
             }}
             onTaskDelete={(id) => {
               dispatch(deleteAction(id));

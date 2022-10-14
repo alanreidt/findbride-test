@@ -1,6 +1,6 @@
+import { AnyAction } from "redux";
 import { LinkedListNode } from "./types/LinkedListNode";
 import { Task, TaskStatus } from "./types/Task";
-import { AnyAction } from "redux";
 import {
   addAction,
   changeTaskStatusAction,
