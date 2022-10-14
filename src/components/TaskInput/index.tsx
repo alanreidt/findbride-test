@@ -30,10 +30,10 @@ export function TaskInput({ onAdd, onInvert }: Props) {
           placeholder="Enter task name"
           onChange={handleChange}
         />
-        <button className={styles.Button} type="submit">
+        <button type="submit" className={styles.Button}>
           Add
         </button>
-        <button className={styles.Button} onClick={onInvert}>
+        <button type="button" className={styles.Button} onClick={onInvert}>
           Invert
         </button>
       </div>

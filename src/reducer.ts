@@ -70,7 +70,14 @@ export function tasksReducer(
 
     return { ...state, headTask: arrToLinkedList(newTasks) };
   } else if (invertAction.match(action)) {
-    return state;
+    if (state.headTask === null) {
+      return state;
+    }
+
+    const tasks = linkedListToArr(state.headTask);
+    const newTasks = tasks.reverse();
+
+    return { ...state, headTask: arrToLinkedList(newTasks) };
   } else {
     return state;
   }
