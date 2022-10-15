@@ -61,14 +61,21 @@ export function tasksReducer(
       return state;
     }
 
-    const tasks = linkedListToArr(state.headTask);
+    let currentHead = state.headTask;
+    let newHeadTask = { ...state.headTask };
+    let currentNewHead = newHeadTask;
     const { id, status } = action.payload;
 
-    const newTasks = tasks.map((task) =>
-      task.id === id ? { ...task, status } : task
-    );
+    while (currentHead.next !== null) {
+      currentHead = currentHead.next;
+      currentNewHead.next =
+        currentHead.value.id === id
+          ? { ...currentHead, value: { ...currentHead.value, status } }
+          : { ...currentHead };
+      currentNewHead = currentNewHead.next;
+    }
 
-    return { ...state, headTask: arrToLinkedList(newTasks) };
+    return { ...state, headTask: newHeadTask };
   } else if (deleteAction.match(action)) {
     if (state.headTask === null) {
       return state;
