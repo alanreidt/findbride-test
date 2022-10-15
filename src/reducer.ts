@@ -36,17 +36,26 @@ export function tasksReducer(
       };
     }
 
-    const tasks = linkedListToArr(state.headTask);
-    tasks.push({
-      id: Date.now(),
-      name: action.payload,
-      status: TaskStatus.IN_PROGRESS,
-    });
+    let currentHead = state.headTask;
+    let newHeadTask = { ...state.headTask };
+    let currentNewHead = newHeadTask;
 
-    return {
-      ...state,
-      headTask: arrToLinkedList(tasks),
+    while (currentHead.next !== null) {
+      currentHead = currentHead.next;
+      currentNewHead.next = { ...currentHead };
+      currentNewHead = currentNewHead.next;
+    }
+
+    currentNewHead.next = {
+      value: {
+        id: Date.now(),
+        name: action.payload,
+        status: TaskStatus.IN_PROGRESS,
+      },
+      next: null,
     };
+
+    return { ...state, headTask: newHeadTask };
   } else if (changeTaskStatusAction.match(action)) {
     if (state.headTask === null) {
       return state;
