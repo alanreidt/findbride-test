@@ -81,10 +81,24 @@ export function tasksReducer(
       return state;
     }
 
-    const tasks = linkedListToArr(state.headTask);
-    const newTasks = tasks.filter((task) => task.id !== action.payload);
+    let currentHead = state.headTask;
+    let newHeadTask = { ...state.headTask };
+    let currentNewHead = newHeadTask;
 
-    return { ...state, headTask: arrToLinkedList(newTasks) };
+    while (currentHead.next !== null) {
+      currentHead = currentHead.next;
+
+      if (currentHead.value.id === action.payload) {
+        continue;
+      }
+
+      currentNewHead.next = { ...currentHead };
+      currentNewHead = currentNewHead.next;
+    }
+
+    currentNewHead.next = null;
+
+    return { ...state, headTask: newHeadTask };
   } else if (invertAction.match(action)) {
     if (state.headTask === null) {
       return state;
