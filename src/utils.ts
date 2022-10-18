@@ -1,4 +1,5 @@
 import { LinkedListNode } from "./types/LinkedListNode";
+import { Task } from "./types/Task";
 
 const linkedListToArr = <T>(linkedList: LinkedListNode<T>) => {
   const arr = [linkedList.value];
@@ -45,4 +46,22 @@ const arrToLinkedList = <T>(arr: Array<T>) => {
   return linkedList;
 };
 
-export { linkedListToArr, arrToLinkedList };
+const deleteTask = function self(
+  currentHead: LinkedListNode<Task> | null,
+  id: number
+): LinkedListNode<Task> | null {
+  if (currentHead === null) {
+    return null;
+  }
+
+  if (currentHead.value.id === id) {
+    return self(currentHead.next, id);
+  }
+
+  return {
+    ...currentHead,
+    next: self(currentHead.next, id),
+  };
+};
+
+export { linkedListToArr, arrToLinkedList, deleteTask };

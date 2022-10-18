@@ -7,7 +7,7 @@ import {
   invertAction,
   deleteAction,
 } from "./actions";
-import { arrToLinkedList, linkedListToArr } from "./utils";
+import { arrToLinkedList, deleteTask, linkedListToArr } from "./utils";
 
 type TasksState = {
   headTask: LinkedListNode<Task> | null;
@@ -77,28 +77,10 @@ export function tasksReducer(
 
     return { ...state, headTask: newHeadTask };
   } else if (deleteAction.match(action)) {
-    if (state.headTask === null) {
-      return state;
-    }
-
-    let currentHead = state.headTask;
-    let newHeadTask = { ...state.headTask };
-    let currentNewHead = newHeadTask;
-
-    while (currentHead.next !== null) {
-      currentHead = currentHead.next;
-
-      if (currentHead.value.id === action.payload) {
-        continue;
-      }
-
-      currentNewHead.next = { ...currentHead };
-      currentNewHead = currentNewHead.next;
-    }
-
-    currentNewHead.next = null;
-
-    return { ...state, headTask: newHeadTask };
+    return {
+      ...state,
+      headTask: deleteTask(state.headTask, action.payload),
+    };
   } else if (invertAction.match(action)) {
     if (state.headTask === null) {
       return state;
