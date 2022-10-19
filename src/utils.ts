@@ -46,6 +46,20 @@ const arrToLinkedList = <T>(arr: Array<T>) => {
   return linkedList;
 };
 
+const addTask = function self(
+  currentHead: LinkedListNode<Task> | null,
+  newTask: LinkedListNode<Task>
+): LinkedListNode<Task> | null {
+  if (currentHead === null) {
+    return newTask;
+  }
+
+  return {
+    ...currentHead,
+    next: self(currentHead.next, newTask),
+  };
+};
+
 const deleteTask = function self(
   currentHead: LinkedListNode<Task> | null,
   id: number
@@ -64,4 +78,4 @@ const deleteTask = function self(
   };
 };
 
-export { linkedListToArr, arrToLinkedList, deleteTask };
+export { linkedListToArr, arrToLinkedList, addTask, deleteTask };
