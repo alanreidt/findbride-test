@@ -1,5 +1,5 @@
 import { LinkedListNode } from "./types/LinkedListNode";
-import { Task } from "./types/Task";
+import { Task, TaskStatus } from "./types/Task";
 
 const linkedListToArr = <T>(linkedList: LinkedListNode<T>) => {
   const arr = [linkedList.value];
@@ -60,6 +60,27 @@ const addTask = function self(
   };
 };
 
+const changeTaskStatus = function self(
+  currentHead: LinkedListNode<Task> | null,
+  { id, status }: { id: number; status: TaskStatus }
+): LinkedListNode<Task> | null {
+  if (currentHead === null) {
+    return null;
+  }
+
+  if (currentHead.value.id === id) {
+    return {
+      value: { ...currentHead.value, status },
+      next: self(currentHead.next, { id, status }),
+    };
+  }
+
+  return {
+    ...currentHead,
+    next: self(currentHead.next, { id, status }),
+  };
+};
+
 const deleteTask = function self(
   currentHead: LinkedListNode<Task> | null,
   id: number
@@ -78,4 +99,10 @@ const deleteTask = function self(
   };
 };
 
-export { linkedListToArr, arrToLinkedList, addTask, deleteTask };
+export {
+  linkedListToArr,
+  arrToLinkedList,
+  addTask,
+  changeTaskStatus,
+  deleteTask,
+};
