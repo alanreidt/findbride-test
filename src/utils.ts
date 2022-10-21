@@ -99,10 +99,25 @@ const deleteTask = function self(
   };
 };
 
+const invertTasks = function self(
+  currentHead: LinkedListNode<Task> | null,
+  prevHead: LinkedListNode<Task> | null
+): LinkedListNode<Task> | null {
+  if (currentHead === null) {
+    return prevHead;
+  }
+
+  return self(currentHead.next, {
+    ...currentHead,
+    next: prevHead,
+  });
+};
+
 export {
   linkedListToArr,
   arrToLinkedList,
   addTask,
   changeTaskStatus,
   deleteTask,
+  invertTasks,
 };
