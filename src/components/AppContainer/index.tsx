@@ -1,20 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useStore } from "effector-react";
 import { TaskInput } from "../TaskInput";
 import { TaskList } from "../TaskList";
 import { $tasks } from "../../store";
 import {
-  addAction,
-  changeTaskStatusAction,
-  invertAction,
-  deleteAction,
+  taskAdded,
+  tasksInverted,
+  taskStatusChanged,
+  taskRemoved,
 } from "../../actions";
 import styles from "./AppContainer.css";
 
 export function AppContainer() {
   const tasks = useStore($tasks);
-  const dispatch = useDispatch();
 
   return (
     <div className={styles.App}>
@@ -23,20 +21,18 @@ export function AppContainer() {
       <div className={styles.TaskInputWrapper}>
         <TaskInput
           onAdd={(name) => {
-            dispatch(addAction(name));
+            taskAdded(name);
           }}
-          onInvert={() => {
-            dispatch(invertAction());
-          }}
+          onInvert={tasksInverted}
         />
         {tasks.length > 0 && (
           <TaskList
             tasks={tasks}
             onTaskStatusChange={(statusChangeState) => {
-              dispatch(changeTaskStatusAction(statusChangeState));
+              taskStatusChanged(statusChangeState);
             }}
             onTaskDelete={(id) => {
-              dispatch(deleteAction(id));
+              taskRemoved(id);
             }}
           />
         )}

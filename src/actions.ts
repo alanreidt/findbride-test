@@ -1,10 +1,10 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createEvent } from "effector";
 import { TaskStatus } from "./types/Task";
 
-export const addAction = createAction<string>("add");
-export const deleteAction = createAction<number>("delete");
-export const changeTaskStatusAction = createAction<{
+export const taskAdded = createEvent<string>("Task added");
+export const taskRemoved = createEvent<number>("Task removed");
+export const taskStatusChanged = createEvent<{
   id: number;
   status: TaskStatus;
-}>("changeState");
-export const invertAction = createAction("invert");
+}>("Task status changed");
+export const tasksInverted = createEvent("Tasks inverted");
