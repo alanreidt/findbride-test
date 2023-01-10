@@ -1,18 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useStore } from "effector-react";
 import { TaskInput } from "../TaskInput";
-import { useDispatch, useSelector } from "react-redux";
-import { tasksSelector } from "../../selectors";
+import { TaskList } from "../TaskList";
+import { $tasks } from "../../store";
 import {
   addAction,
   changeTaskStatusAction,
   invertAction,
   deleteAction,
 } from "../../actions";
-import { TaskList } from "../TaskList";
 import styles from "./AppContainer.css";
 
 export function AppContainer() {
-  const tasks = useSelector(tasksSelector);
+  const tasks = useStore($tasks);
   const dispatch = useDispatch();
 
   return (
