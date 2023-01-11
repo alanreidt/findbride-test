@@ -1,4 +1,4 @@
-import { combine, createStore } from "effector";
+import { createStore } from "effector";
 import { LinkedListNode } from "./types/LinkedListNode";
 import { Task } from "./types/Task";
 import { linkedListToArr } from "./utils";
@@ -13,7 +13,7 @@ const initialState: TasksState = {
 
 export const $taskList = createStore(initialState);
 
-export const $tasks = combine($taskList, (taskList) => {
+export const $tasks = $taskList.map((taskList) => {
   const headTask = taskList.headTask;
 
   return headTask === null ? [] : linkedListToArr(headTask);
